@@ -5,7 +5,7 @@
 1. install AWSCLI
    ```sh
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    sudo apt install unzip python # install unzip & python3 in case of necessity
+    sudo apt install unzip python3 # install unzip & python3 in case of necessity
     unzip awscliv2.zip
     sudo ./aws/install
     ./aws/install -i /usr/local/aws-cli -b /usr/local/bin #Execute this line if you don't want to use sudo from the previous line
