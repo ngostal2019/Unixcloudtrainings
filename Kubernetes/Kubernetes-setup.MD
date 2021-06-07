@@ -59,9 +59,9 @@
     ```
 1. Suggestions from kops(optional):
  * list clusters with: kops get cluster
- * edit this cluster with: kops edit cluster devops.k8s.uct.in
- * edit your node instance group: kops edit ig --name=devops.k8s.uct.in nodes-us-east-2a
- * edit your master instance group: kops edit ig --name=devops.k8s.uct.in master-us-east-2a
+ * edit this cluster with: kops edit cluster devops.k8s.uct1.in
+ * edit your node instance group: kops edit ig --name=devops.k8s.uct1.in nodes-us-east-2a
+ * edit your master instance group: kops edit ig --name=devops.k8s.uct1.in master-us-east-2a
 
 1. Create kubernetes cluser
     ```sh
