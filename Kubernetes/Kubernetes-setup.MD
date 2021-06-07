@@ -4,11 +4,11 @@
 1. Create Ubuntu EC2 instance
 1. install AWSCLI
    ```sh
-    curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip
-    apt install unzip python
-    unzip awscli-bundle.zip
-    #sudo apt-get install unzip - if you dont have unzip in your system
-    ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    sudo apt install unzip python # install unzip & python3 in case of necessity
+    unzip awscliv2.zip
+    sudo ./aws/install
+    ./aws/install -i /usr/local/aws-cli -b /usr/local/bin #Execute this line if you don't want to use sudo from the previous line
     ```
 
 1. Install kubectl on ubuntu instance
@@ -24,7 +24,7 @@
     chmod +x kops-linux-amd64
     sudo mv kops-linux-amd64 /usr/local/bin/kops
     ```
-1. Create an IAM user/role  with Route53, EC2, IAM and S3 full access
+1. Create an IAM user/role  with Route53, EC2, IAM, VPC and S3 full access
 
 1. Attach IAM role to ubuntu instance
    ```sh
@@ -35,17 +35,17 @@
 1. Create a Route53 private hosted zone (you can create Public hosted zone if you have a domain)
    ```sh
    Routeh53 --> hosted zones --> created hosted zone  
-   Domain Name: valaxy.net
-   Type: Private hosted zone for Amzon VPC
+   Domain Name: uct1.in
+   Type: Private hosted zone for Amazon VPC
    ```
 
 1. create an S3 bucket
    ```sh
-    aws s3 mb s3://demo.k8s.valaxy.net
+    aws s3 mb s3://devops.k8s.uct1.in
    ```
 1. Expose environment variable:
    ```sh
-    export KOPS_STATE_STORE=s3://demo.k8s.valaxy.net
+    export KOPS_STATE_STORE=s3://devops.k8s.uct1.in
    ```
 
 1. Create sshkeys before creating cluster
@@ -55,12 +55,17 @@
 
 1. Create kubernetes cluster definitions on S3 bucket
    ```sh
-   kops create cluster --cloud=aws --zones=ap-south-1b --name=demo.k8s.valaxy.net --dns-zone=valaxy.net --dns private 
+   kops create cluster --cloud=aws --zones=us-east-2a --name=devops.k8s.uct1.in --dns-zone=uct1.in --dns private
     ```
+1. Suggestions from kops(optional):
+ # * list clusters with: kops get cluster
+ # * edit this cluster with: kops edit cluster devops.k8s.uct.in
+ # * edit your node instance group: kops edit ig --name=devops.k8s.uct.in nodes-us-east-2a
+ # * edit your master instance group: kops edit ig --name=devops.k8s.uct.in master-us-east-2a
 
 1. Create kubernetes cluser
     ```sh
-    kops update cluster demo.k8s.valaxy.net --yes
+    kops update cluster devops.k8s.uct1.in --yes
     ```
 
 1. Validate your cluster
@@ -75,21 +80,21 @@
 
 1. To delete cluster
     ```sh
-     kops delete cluster demo.k8s.valaxy.net --yes
+     kops delete cluster devops.k8s.uct1.in --yes
     ```
    
 #### Deploying Nginx pods on Kubernetes
 1. Deploying Nginx Container
     ```sh
-    kubectl run sample-nginx --image=nginx --replicas=2 --port=80
-    # kubectl run simple-devops-project --image=yankils/simple-devops-image --replicas=2 --port=8080
+    kubectl create deployment sample-nginx --image=nginx --replicas=2 --port=80
+    # kubectl create deployment devops-tomcat --image=ngostal/devops-tomcat-image:v1 --replicas=2 --port=8080
     kubectl get pods
     kubectl get deployments
    ```
 
 1. Expose the deployment as service. This will create an ELB in front of those 2 containers and allow us to publicly access them.
    ```sh
-   kubectl expose deployment sample-nginx --port=80 --type=LoadBalancer
-   # kubectl expose deployment simple-devops-project --port=8080 --type=LoadBalancer
+   kubectl expose deployment devops-tomcat --port=80 --type=LoadBalancer
+   # kubectl expose deployment devops-tomcat --port=8080 --type=LoadBalancer
    kubectl get services -o wide
    ```
