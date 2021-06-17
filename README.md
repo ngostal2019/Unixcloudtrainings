@@ -3,7 +3,7 @@
 ### **Pre-requisites:
 1. It is *Highly* recommended to pocess a system administration background before attending the project
 2. A solid understanding of Linux OS commands along with the importance of each aws service is nice to have.
-3. You don't have a Linux administration/aws background yet? Please, head over our website at https://www.unixcloudtrainings.com to see the list of the
+3. You don't have a Linux administration/aws background yet? Please, head over to our website at https://www.unixcloudtrainings.com to see the list of the
  modules we offer.
  
 ### Purpose:
