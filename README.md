@@ -1,12 +1,16 @@
-# UNIXCLOUDTRAININGS DevOps CI/CD Pipeline Project
+# Welcome on this UNIXCLOUDTRAININGS DevOps CI/CD Pipeline Project
 
-This Repository is a collection of Implementation documents. 
-
+### **Pre-requisites:
+1. It is *Highly* recommended to pocess a system administration background before attending the project
+2. A solid understand of Linux OS commands along with the immportances of each aws service is nice to have.
+3. You don't have a Linux administration/aws background yet? Please, head over our website at https://unixcloudtrainings.com to see the list of our modules we offer.
+ 
 ### Purpose:
-By following this repository you will be able to setup an end to end DevOps CI/CD Pipeline using
+By the end of this project you will be able to understand the benefits of implementing an end-to-end DevOps CI/CD pipeline and to deploy a Java based application on to a Kubernetes cluster over AWS (Amazon Web Services) using tools like:
 - git
 - Jenkins
 - Maven
+- Tomecat
 - Ansible
 - Docker
 - Kubernetes
