@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: valaxy-service
+  name: uct-service
   labels:
-    app: valaxy-devops-project
+    app: uct-devops-project
 spec:
   selector:
-    app: valaxy-devops-project
+    app: uct-devops-project
   type: LoadBalancer
   ports:
     - port: 8080
