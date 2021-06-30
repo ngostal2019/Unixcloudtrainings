@@ -11,15 +11,15 @@
    docker --version 
    
    # start docker services
-   service docker start
-   service docker status
+   systemctl start docker
+   systemctl status docker
    ```
-1. Create a user called dockeradmin
+1. Create a user called dockeradmin & his password
    ```sh
    useradd dockeradmin
    passwd dockeradmin
    ```
-1. add a user to docker group to manage docker 
+1. add the user to docker group to manage docker 
    ```
    usermod -aG docker dockeradmin
    ```

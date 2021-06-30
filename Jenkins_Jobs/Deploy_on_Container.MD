@@ -10,7 +10,7 @@
    # Pull tomcat latest image from dockerhub 
    From tomcat
    # Maintainer
-   MAINTAINER "AR Shankar" 
+   LABEL ORGANIZATION="UNIXCLOUDTRAININGS" 
 
    # copy war file on to container 
    COPY ./webapp.war /usr/local/tomcat/webapps
@@ -31,14 +31,14 @@ Enable connection between Docker-host and Jenkins
        -  `Advanced` > chose `Use password authentication, or use a different key`
 		 - password: `*******`
  
-### Steps to create "Deploy_on_Container" Jenkin job
+### Steps to create "Deploy_on_Container" Jenkins job
 #### From Jenkins home page select "New Item"
    - Enter an item name: `Deploy_on_Container`
      - Copy from: `Deploy_on_Docker_Host`
      
    - *Source Code Management:*
-      - Repository: `https://github.com/yankils/hello-world.git`
-      - Branches to build : `*/master`  
+      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Branches to build : `*/main`  
    - *Poll SCM* :      - `* * * *`
 
    - *Build:*

@@ -28,8 +28,8 @@
      - Copy from: `My_First_Maven_Build`
      
    - *Source Code Management:*
-      - Repository: `https://github.com/yankils/hello-world.git`
-      - Branches to build : `*/master`  
+      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Branches to build : `*/main`  
    - *Poll SCM* :      - `* * * *`
 
    - *Build:*
@@ -39,7 +39,7 @@
  - *Post-build Actions*
    - Deploy war/ear to container
       - WAR/EAR files : `**/*.war`
-      - Containers : `Tomcat 8.x`
+      - Containers : `Tomcat 9.x`
          - Credentials: `deployer` (user created on above)
          - Tomcat URL : `http://<PUBLIC_IP>:8080`
 

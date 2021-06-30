@@ -20,13 +20,13 @@ Docker Hub is a cloud-based registry service which allows you to link to code re
 
 1. create a custom tag to the docker image
    ```sh
-   docker tag ubuntu:latest valaxy/ubuntu:demo
+   docker tag ubuntu:latest ngostal/ubuntu:demo
    ```
 
 1. login to your docker hub registry 
    ```sh
    docker login
-   docker push valaxy/ubuntu:demo
+   docker push ngostal/ubuntu:demo
    ```
 
 ### testing 
@@ -38,6 +38,6 @@ Docker Hub is a cloud-based registry service which allows you to link to code re
 
 1. Pull your custom image from your docker account
    ```sh
-   docker pull valaxy/ubuntu:demo
+   docker pull ngostal/ubuntu:demo
    ```
 

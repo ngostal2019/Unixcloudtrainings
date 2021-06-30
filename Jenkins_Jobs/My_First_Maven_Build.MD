@@ -13,8 +13,8 @@ We know how to use work with each and Git, Jenkins independently. What if you wa
 1. Login to Jenkins console
 1. Create *Jenkins job*, Fill the following details,
    - *Source Code Management:*
-      - Repository: `https://github.com/yankils/hello-world.git`
-      - Branches to build : `*/master`  
+      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Branches to build : `*/main`  
    - *Build:*
      - Root POM:`pom.xml`
      - Goals and options: `clean install package`
