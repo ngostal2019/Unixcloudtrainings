@@ -10,7 +10,7 @@ docker image pull <image_name>:<image_version/tag>
 
 3. List out docker images from your local system
 ```sh
-docker image ls
+docker image ls or docker images
 ```
 
 4. Create/run/start a docker container from image
@@ -32,7 +32,7 @@ docker run -d --name httpd_server -p 8080:80 httpd:2.2
 docker ps
 ```
 
-7. List out all docker container (running, stpooed, terminated, etc...)
+7. List out all docker container (running, stopped, terminated, etc...)
 ```sh
 docker ps -a
 ```

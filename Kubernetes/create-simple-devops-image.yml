@@ -9,11 +9,11 @@
       chdir: /opt/k8s-lab
 
   - name: create tag to image
-    command: docker tag simple-devops-image yankils/simple-devops-image
+    command: docker tag simple-devops-image ngostal/simple-devops-image
 
   - name: push image on to dockerhub
-    command: docker push yankils/simple-devops-image
+    command: docker push ngostal/simple-devops-image
 
   - name: remove docker images form ansible server
-    command: docker rmi simple-devops-image:latest yankils/simple-devops-image
+    command: docker rmi simple-devops-image:latest ngostal/simple-devops-image
     ignore_errors: yes

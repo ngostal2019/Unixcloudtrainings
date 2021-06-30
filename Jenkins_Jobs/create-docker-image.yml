@@ -1,4 +1,4 @@
-# Option-1 : Createting docker image using command module 
+# Option-1 : Creating docker image using command module 
 ---
 - hosts: all
   become: true

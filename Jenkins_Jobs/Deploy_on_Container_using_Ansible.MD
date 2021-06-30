@@ -6,16 +6,16 @@
 1. Jenkins server 
 1. Docker-host server 
 1. Ansible server
-1. `Dockerfile` under *`/opt/docker`* on Ansible server **[Get Help Here]()**
+1. `Dockerfile` under *`/opt/docker`* on Ansible server
    ```sh 
    # Pull tomcat latest image from dockerhub 
    From tomcat
    # Maintainer
-   MAINTAINER "AR Shankar" 
+   LABEL ORGANIZATION="UNIXCLOUDTRAININGS" 
 
    # copy war file on to container 
    COPY ./webapp.war /usr/local/tomcat/webapps
-1. Create `create-docker-image.yml` unser *`/opt/docker`* on Ansible server **[Get Help Here]()**
+1. Create `create-docker-image.yml` unser *`/opt/docker`* on Ansible server 
    ```sh
    ---
    - hosts: all
@@ -28,11 +28,11 @@
        args:
          chdir: /opt/docker
    ```
-1. Create `create-docker-image.yml` under *`/opt/docker`* on Ansible server **[Get Help Here]()**
+1. Create `create-docker-image.yml` under *`/opt/docker`* on Ansible server
    ```ssh
    ---
    - hosts: all
-     become: ture
+     become: true
 
      tasks:
      - name: creating docker image using docker command
@@ -62,8 +62,8 @@ Enable connection between Ansible-control-node and Jenkins
      - Copy from: `Deploy_on_Container`
      
    - *Source Code Management:*
-      - Repository: `https://github.com/yankils/hello-world.git`
-      - Branches to build : `*/master`  
+      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Branches to build : `*/main`  
    - *Poll SCM* :      - `* * * *`
 
    - *Build:*
