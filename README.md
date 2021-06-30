@@ -11,7 +11,7 @@ By the end of this project you will be able to understand the benefits of implem
 - git
 - Jenkins
 - Maven
-- Tomecat
+- Tomcat
 - Ansible
 - Docker
 - Kubernetes
