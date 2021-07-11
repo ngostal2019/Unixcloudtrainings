@@ -28,26 +28,20 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    vi ~/.bash_profile
    # If for some reason you don't find the PATH variable in this file on-premise, please add these lines along with the JAVA_HOME variable you're trying to setup.
    PATH=$PATH:$HOME/.local/bin:$HOME/bin
-
    export PATH
-    ```
 
- ### To load your modifications run
-  
-   [root@~]# source .bash_profile
+   - To load your modifications run
    
+   [root@~]# source .bash_profile
    Then
-
    [root@~]# java -version
-
-
+   
    The output should be something like this
 
-   openjdk version "1.8.0_151"
-   OpenJDK Runtime Environment (build 1.8.0_151-b12)
-   OpenJDK 64-Bit Server VM (build 25.151-b12, mixed mode)
+   openjdk version "1.8.0_282"
+   OpenJDK Runtime Environment (build 1.8.0_282-b08)
+   OpenJDK 64-Bit Server VM (build 25.282-b08, mixed mode)
    ```
-
 ## Install Jenkins
  You can install jenkins using the rpm or by setting up the repo. We will set up the repo so that we can update it easily in the future.
 1. Get the latest version of jenkins from https://pkg.jenkins.io/redhat-stable/ and install
@@ -55,16 +49,16 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    yum -y install wget
    sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
    sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-   yum -y install jenkins
+   sudo yum -y install jenkins
    ```
 
    ### Start Jenkins
    ```sh
    # Start jenkins service
-   service jenkins start
+   sudo service jenkins start OR sudo systemctl start jenkins
 
    # Setup Jenkins to start at boot,
-   chkconfig jenkins on
+   sudo chkconfig jenkins on OR sudo systemctl enable jenkins
    ```
 
    ### Accessing Jenkins
