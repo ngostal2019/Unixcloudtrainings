@@ -24,7 +24,7 @@
     chmod +x kops-linux-amd64
     sudo mv kops-linux-amd64 /usr/local/bin/kops
     ```
-1. Create an IAM user/role  with Route53, EC2, IAM, VPC and S3 full access
+1. Create an IAM user/role  with Route53, EC2, IAM, VPC and S3 full access OR simply give AdministratorAccess (Not recommanded for production usage)
 
 1. Attach IAM role to ubuntu instance
    ```sh
@@ -39,13 +39,13 @@
    Type: Private hosted zone for Amazon VPC
    ```
 
-1. create an S3 bucket
+1. create an S3 bucket (A bucket should have a unique name all across the AWS account)
    ```sh
-    aws s3 mb s3://devops.k8s.uct1.in
+    aws s3 mb s3://devops1.k8s.uct1.in 
    ```
-1. Expose environment variable:
+1. Expose environment variable (Use the same name as the bucket you created): 
    ```sh
-    export KOPS_STATE_STORE=s3://devops.k8s.uct1.in
+    export KOPS_STATE_STORE=s3://devops1.k8s.uct1.in 
    ```
 
 1. Create sshkeys before creating cluster
@@ -55,7 +55,7 @@
 
 1. Create kubernetes cluster definitions on S3 bucket
    ```sh
-   kops create cluster --cloud=aws --zones=us-east-2a --name=devops.k8s.uct1.in --dns-zone=uct1.in --dns private
+   kops create cluster --cloud=aws --zones=us-east-2a --name=devops1.k8s.uct1.in --node-count=2 --ssh-public-key=~/.ssh/id_rsa.pub --dns-zone=uct1.in --dns private
     ```
 1. Suggestions from kops(optional):
  * list clusters with: kops get cluster
@@ -68,7 +68,7 @@
     kops update cluster devops.k8s.uct1.in --yes
     ```
 
-1. Validate your cluster
+1. Validate your cluster (Your cluster will be ready between 5 - 10 minutes)
      ```sh
       kops validate cluster
     ```
