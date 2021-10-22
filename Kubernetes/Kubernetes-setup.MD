@@ -59,13 +59,13 @@
     ```
 1. Suggestions from kops(optional):
  * list clusters with: kops get cluster
- * edit this cluster with: kops edit cluster devops.k8s.uct1.in
- * edit your node instance group: kops edit ig --name=devops.k8s.uct1.in nodes-us-east-2a
- * edit your master instance group: kops edit ig --name=devops.k8s.uct1.in master-us-east-2a
+ * edit this cluster with: kops edit cluster devops1.k8s.uct1.in
+ * edit your node instance group: kops edit ig --name=devops1.k8s.uct1.in nodes-us-east-2a
+ * edit your master instance group: kops edit ig --name=devops1.k8s.uct1.in master-us-east-2a
 
 1. Create kubernetes cluser
     ```sh
-    kops update cluster devops.k8s.uct1.in --yes
+    kops update cluster devops1.k8s.uct1.in --yes
     ```
 
 1. Validate your cluster (Your cluster will be ready between 5 - 10 minutes)
@@ -80,7 +80,7 @@
 
 1. To delete cluster
     ```sh
-     kops delete cluster devops.k8s.uct1.in --yes
+     kops delete cluster devops1.k8s.uct1.in --yes
     ```
    
 #### Deploying Nginx pods on Kubernetes
