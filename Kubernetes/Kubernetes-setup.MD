@@ -65,7 +65,7 @@
 
 1. Create kubernetes cluser
     ```sh
-    kops update cluster devops1.k8s.uct1.in --yes
+    kops update cluster devops1.k8s.uct1.in --yes # or kops update cluster devops1.k8s.uct1.in --yes --state=s3://devops1.k8s.uct1.in/ --admin
     ```
 
 1. Validate your cluster (Your cluster will be ready between 5 - 10 minutes)
