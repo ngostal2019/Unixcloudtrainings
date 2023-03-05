@@ -43,6 +43,12 @@ Ansible is an open-source automation platform. It is very, very simple to set up
    ssh-copy-id ansadmin@<target-server>
    ```
 
+1. Enable password authentication to the ansible server for the jenkins machine to connect to it.
+   ```sh
+      sudo vim /etc/ssh/sshd_config --> type /PasswordAuthentication --> hit `Enter` --> change it from `no` to `yes`
+      Type `sudo systemctl reload sshd`
+   ```
+
 1. Ansible server is in this case used to create images and store on docker registry. Hence install docker, start docker services and add ansadmin to the docker group. 
    ```sh
    sudo yum install docker -y

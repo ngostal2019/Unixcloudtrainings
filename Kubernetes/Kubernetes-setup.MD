@@ -21,7 +21,7 @@
    ```
 
 ## 2nd setups on the EC2 VM
-1. Create Amazon Linux EC2 instance `k8-bootstrap-server` in your region --> I will stick to `us-east-1` aws region which correspond to `West Virginia`
+1. Create Amazon Linux EC2 instance `k8-bootstrap-server` in your region --> I will stick to `us-east-1` aws region which correspond to `North Virginia`
 
 1. Create ansadmin username and provide admin privileges since we will use him/her with ansible machine and it will ease the process of manging the cluster
    ```sh
