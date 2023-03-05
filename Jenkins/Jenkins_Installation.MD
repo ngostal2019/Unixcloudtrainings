@@ -16,11 +16,11 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    sudo amazon-linux-extras -y install java-openjdk11
    ```
 
-1. Confirm Java Version and set the java home
+1. Confirm Java Version and set the java home momentally
    ```sh
    java -version
    find /usr/lib/jvm -name "*jre*"
-   JAVA_HOME=/usr/lib/jvm/jre-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
+   JAVA_HOME=/usr/lib/jvm/jre-11-openjdk-11.0.18.0.10-1.amzn2.0.1.x86_64
    PATH=$PATH:$JAVA_HOME
    ```
    
@@ -28,30 +28,31 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    ```sh
    vi ~/.bash_profile
    # If for some reason you don't find the PATH variable in this file on-premise, please add these lines along with the JAVA_HOME variable you're trying to setup.
-   PATH=$PATH:$HOME/.local/bin:$HOME/bin
+   JAVA_HOME=/usr/lib/jvm/jre-11-openjdk-11.0.18.0.10-1.amzn2.0.1.x86_64
+   PATH=$PATH:$HOME/.local/bin:$HOME/bin:$JAVA_HOME
    export PATH
 
    - To load your recent modifications, run
    
    [root@~]# source .bash_profile
-   
+
    Then
    [root@~]# java -version
    
    The output should be something similar like this one below:
 
-   openjdk version "11.0.14.1" 2022-02-08 LTS
-   OpenJDK Runtime Environment 18.9 (build 11.0.14.1+1-LTS)
-   OpenJDK 64-Bit Server VM 18.9 (build 11.0.14.1+1-LTS, mixed mode)
+   openjdk version "11.0.18" 2023-01-17 LTS
+   OpenJDK Runtime Environment (Red_Hat-11.0.18.0.10-1.amzn2.0.1) (build 11.0.18+10-LTS)
+   OpenJDK 64-Bit Server VM (Red_Hat-11.0.18.0.10-1.amzn2.0.1) (build 11.0.18+10-LTS, mixed mode, sharing)
    ```
+
 ## Install Jenkins
  You can install jenkins using the rpm or by setting up the repo. We will set up the repo so that we can update it easily in the future.
 1. Get the latest version of jenkins from https://pkg.jenkins.io/redhat-stable/ and install
    ```sh
    yum -y install wget
    sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-   sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-   sudo amazon-linux-extras -y install epel 
+   sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key 
    sudo yum -y install jenkins
 
    # Note: The "epel-release" package install by the amazon package manager will help in getting the "daemonize" package required as a dependency by the "jenkins" package.

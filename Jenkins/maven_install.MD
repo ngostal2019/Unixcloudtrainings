@@ -10,25 +10,27 @@ Maven is a code build tool which used to convert your code to an artifact. this 
  - Link : https://maven.apache.org/download.cgi
     ```sh
      # Creating maven directory under /opt
-     mkdir /opt/maven
+     sudo mkdir /opt/maven
      cd /opt/maven
      # downloading maven version 3.6.3
-     wget https://www-us.apache.org/dist/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz 
-     tar -xvzf apache-maven-3.8.3-bin.tar.gz
+     sudo wget https://dlcdn.apache.org/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz 
+     sudo tar -xvzf apache-maven-3.9.0-bin.tar.gz
+     sudo mv apache-maven-3.9.0-bin.tar.gz maven39
+     sudo rm -rf apache-maven-3.9.0-bin.tar.gz
      ```
 	
 1. Setup M2_HOME and M2 paths in .bash_profile of the user and add these to the path variable
    ```sh
    vi ~/.bash_profile
-   M2_HOME=/opt/maven/apache-maven-3.8.3
-   M2=$M2_HOME/bin
-   PATH=<Existing_PATH>:$M2_HOME:$M2
+   M2_HOME=/opt/maven/maven39
+   PATH=<Existing_PATH>:$M2_HOME:$M2_HOME/bin
    ```
 #### Checkpoint 
 1. Run the command below to load your configuration 
-
-   [root@~] # source .bash_profile
-
+   ```sh
+   source .bash_profile
+  ```
+  
 2. Check maven version
   
     ```sh
