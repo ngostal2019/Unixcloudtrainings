@@ -1,10 +1,15 @@
----
-- name: create service for deployment
-  hosts: kubernetes
-  become: true
-  user: root
-
-  tasks:
-  - name: create a service
-    command: kubectl apply -f uct-service.yml
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: uct-svc
+  labels:
+    app: uct-devops-svc
+    training_center: unixcloudtrainings
+spec:
+  selector:
+    app: uct-devops-pod # This will select the pod that was created under the deployment pod template section
+  type: LoadBalancer # This will create the loadbalancer on AWS
+  ports:
+    - port: 8080 # This is the service port that will be used by the loadbalancer on aws
+      targetPort: 8080 # This is the pod port where the application is available inside the container
+      nodePort: 31200 # This port will be opened on one of the nodes we have on AWS and will foward its traffic to the port 8080 of the loadbalancer

@@ -9,13 +9,13 @@
 1. `Dockerfile` under *`/opt/docker`* on Ansible server
    ```sh 
    # Pull tomcat latest image from dockerhub 
-   From tomcat
+   From ngostal/rockylinux9:tomcat10
    # Maintainer
    LABEL ORGANIZATION="UNIXCLOUDTRAININGS" 
 
    # copy war file on to container 
    COPY ./webapp.war /usr/local/tomcat/webapps
-1. Create `create-docker-image.yml` unser *`/opt/docker`* on Ansible server 
+1. Create `create-car-brand-choice-image.yml` unser *`/opt/docker`* on Ansible server 
    ```sh
    ---
    - hosts: all
@@ -24,11 +24,11 @@
 
      tasks:
      - name: building docker image
-       command: "docker build -t simple-devops-image ." 
+       command: "docker build -t car-brand-choice:v1.0.0 ." 
        args:
          chdir: /opt/docker
    ```
-1. Create `create-docker-image.yml` under *`/opt/docker`* on Ansible server
+1. Create `create-car-brand-choice-image.yml` under *`/opt/docker`* on Ansible server
    ```ssh
    ---
    - hosts: all
@@ -36,7 +36,7 @@
 
      tasks:
      - name: creating docker image using docker command
-       command: docker run -d --name simple-devops-container -p 8080:8080 simple-devops-image
+       command: docker run -d --name car-brand-choice-container -p 8080:8080 car-brand-choice:v1.0.0
    ```
 
 ### Integration between Ansible-control-node and Jenkins
@@ -49,7 +49,7 @@ Enable connection between Ansible-control-node and Jenkins
 - `Manage Jenkins` > `Configure System` > `Publish Over SSH` > `SSH Servers` 
 
 	- SSH Servers:
-                - Name: `ansible-server`
+    - Name: `ansible-server`
 		- Hostname:`<ServerIP>`
 		- username: `ansadmin`
                
@@ -80,7 +80,7 @@ Enable connection between Ansible-control-node and Jenkins
 	       - Remote directory: `//opt//docker`
 	       - Exec command: 
                 ```sh 
-                ansible-playbook -i /opt/docker/hosts /opt/docker/create-docker-image.yml;
+                ansible-playbook -i /etc/ansible/hosts /opt/docker/create-car-brand-choice-image.yml;
                 ```
 
 Save and run the job now.

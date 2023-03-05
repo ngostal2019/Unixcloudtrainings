@@ -1,11 +1,12 @@
 # Install Jenkins on AWS EC2
-Jenkins is a self-contained Java-based program, ready to run out-of-the-box, with packages for Windows, Mac OS X and other Unix-like operating systems. As an extensible automation server, Jenkins can be used as a simple CI server or turned into the continuous delivery hub for any project.
 
+Jenkins is a self-contained Java-based program, ready to run out-of-the-box, with packages for Windows, Mac OS X and other Unix-like operating systems. As an extensible automation server, Jenkins can be used as a simple CI server or turned into the continuous delivery hub for any project.
 
 ### Prerequisites
 1. EC2 Instance 
    - With Internet Access
    - Security Group with Port `8080` open for internet
+
 1. Java v11.0.13.x 
 
 ## Install Java
@@ -20,8 +21,8 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    java -version
    find /usr/lib/jvm -name "*jre*"
    JAVA_HOME=/usr/lib/jvm/jre-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64
-   export JAVA_HOME
    PATH=$PATH:$JAVA_HOME
+   ```
    
  ### To set it permanently update your .bash_profile
    ```sh
@@ -33,14 +34,15 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    - To load your recent modifications, run
    
    [root@~]# source .bash_profile
+   
    Then
    [root@~]# java -version
    
    The output should be something similar like this one below:
 
-openjdk version "11.0.14.1" 2022-02-08 LTS
-OpenJDK Runtime Environment 18.9 (build 11.0.14.1+1-LTS)
-OpenJDK 64-Bit Server VM 18.9 (build 11.0.14.1+1-LTS, mixed mode)
+   openjdk version "11.0.14.1" 2022-02-08 LTS
+   OpenJDK Runtime Environment 18.9 (build 11.0.14.1+1-LTS)
+   OpenJDK 64-Bit Server VM 18.9 (build 11.0.14.1+1-LTS, mixed mode)
    ```
 ## Install Jenkins
  You can install jenkins using the rpm or by setting up the repo. We will set up the repo so that we can update it easily in the future.

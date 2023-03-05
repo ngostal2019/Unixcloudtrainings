@@ -1,0 +1,28 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: uct-car-deployment
+  labels:
+   training_center: unixcloudtrainings
+spec:
+  selector:
+    matchLabels:
+      app: uct-devops-pod # Points to the container nname below in the pod template section
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 # Only one pod will be updated at the time
+      maxUnavailable: 1 # Only one pod will be updated at the time
+
+  template:
+    metadata:
+      labels:
+        app: uct-devops-pod # This pod is called in the matchLabels section under spec
+    spec:
+      containers:
+      - name: uct-devops-container
+        image: ngostal/car-brand-choice
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

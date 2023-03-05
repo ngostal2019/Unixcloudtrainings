@@ -1,6 +1,6 @@
-FROM tomcat:latest
+FROM ngostal/rockylinux9:tomcat10
 
-LABEL ORGANIZATION="www.unixcloudtrainings.com"
+LABEL ORGANIZATION="UNIXCLOUDTRAININGS"
 
 COPY ./webapp.war /usr/local/tomcat/webapps
 

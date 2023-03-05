@@ -2,16 +2,16 @@
 - hosts: all
   become: true
   tasks:
-  - name: stop if we have old docker container
-    command: docker stop simple-devops-container
+  - name: Stop if we have old docker container
+    command: docker stop car-brand-choice-container
     ignore_errors: yes
 
-  - name: remove stopped docker container
-    command: docker rm simple-devops-container
+  - name: Remove stopped docker container
+    command: docker rm car-brand-choice-container
     ignore_errors: yes
 
-  - name: remove current docker image
-    command: docker rmi simple-devops-image
+  - name: Remove current docker image
+    command: docker rmi car-brand-choice:v1.0.0
     ignore_errors: yes
 #    register: result
 #    failed_when:
@@ -19,11 +19,11 @@
 #      - '"docker" not in result.stdout'
 
 
-  - name: building docker image
-    command: docker build -t simple-devops-image .
+  - name: Building docker image
+    command: docker build -t car-brand-choice:v1.0.0 .
     args:
       chdir: /opt/docker
 
-  - name: creating docker image
-    command: docker run -d --name simple-devops-container -p 8080:8080 simple-devops-image
+  - name: Creating docker image
+    command: docker run -d --name car-brand-choice-container -p 8080:8080 car-brand-choice:v1.0.0
 

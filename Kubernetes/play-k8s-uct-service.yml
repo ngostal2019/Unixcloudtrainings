@@ -1,0 +1,10 @@
+---
+- name: Create service for deployment
+  hosts: k8s-bootstrap-server
+  become: true
+  #user: root
+
+  tasks:
+  - name: Applying the service manifest file
+    command: kubectl apply -f k8s-uct-service.yml
+

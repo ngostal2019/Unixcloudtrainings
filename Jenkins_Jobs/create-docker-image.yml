@@ -4,7 +4,7 @@
   become: true
   tasks:
   - name: building docker image
-    command: docker build -t simple-devops-image .
+    command: docker build -t car-brand-choice:v1.0.0 .
     args:
       chdir: /opt/docker
 
@@ -15,6 +15,6 @@
 #    docker_image:
 #      build:
 #        path: /opt/docker
-#      name: simple-devops-image
-#     tag: v1
+#      name: car-brand-choice
+#     tag: v1.0.0
 #     source: build

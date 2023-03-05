@@ -56,8 +56,8 @@ Enable connection between Docker-host and Jenkins
 	       - Exec command: 
                 ```sh 
                 cd /home/dockeradmin;
-                docker build -t simple-devops-image .; 
-                docker run -d --name simple-devops-container -p 8080:8080 simple-devops-image;
+                docker build -t car-brand-choice:v1.0.0 .; 
+                docker run -d --name simple-devops-container -p 8080:8080 car-brand-choice:v1.0.0;
                 ```
 
 Save and run the job now.

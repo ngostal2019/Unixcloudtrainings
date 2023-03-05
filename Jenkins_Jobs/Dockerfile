@@ -1,5 +1,5 @@
-# Pull tomcat latest image from dockerhub 
-From tomcat:latest
+# Pull tomcat image from dockerhub 
+From ngostal/rockylinux9:tomcat10
 
 # Maintainer
 LABEL ORGANIZATION="UNIXCLOUDTRAININGS" 

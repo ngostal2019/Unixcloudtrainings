@@ -1,0 +1,35 @@
+---
+- hosts: ansible-server
+  become: true
+
+  tasks:
+  - name: Stop if we have old docker container
+    command: docker stop car-brand-choice-container
+    ignore_errors: yes
+
+  - name: Remove stopped docker container
+    command: docker rm car-brand-choice-container
+    ignore_errors: yes
+
+  - name: Remove current docker image
+    command: docker rmi car-brand-choice:v1.0.0
+    ignore_errors: yes
+#    register: result
+#    failed_when:
+#      - result.rc == 0
+#      - '"docker" not in result.stdout'
+
+  - name: Building docker image
+    command: docker build -t car-brand-choice:v1.0.0 .
+    args:
+      chdir: /opt/docker
+
+  - name: Create tag to image
+    command: docker tag car-brand-choice ngostal/car-brand-choice:v1.0.0
+
+  - name: Push image on to dockerhub
+    command: docker push ngostal/car-brand-choice:v1.0.0
+
+  - name: Remove docker images form ansible server
+    command: docker rmi car-brand-choice:latest ngostal/car-brand-choice::v1.0.0
+    ignore_errors: yes

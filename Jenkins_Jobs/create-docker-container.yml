@@ -4,15 +4,15 @@
   become: true
 
   tasks:
-  - name: creating docker image using docker command
-    command: docker run -d --name simple-devops-container -p 8080:8080 simple-devops-image
+  - name: Creating docker image using docker command
+    command: docker run -d --name car-brand-choice-container -p 8080:8080 car-brand-choice:v1.0.0
 	
-# option-2 : creating docker container using docker_container module 	
+# option-2 : Creating docker container using docker_container module 	
 #  tasks:
-#  - name: create simple-devops-container
+#  - name: Create car-brand-choice-container
 #    docker_container:
-#      name: simple-devops-container
-#      image: simple-devops-image
+#      name: car-brand-choice-container
+#      image: car-brand-choice
 #      state: present
 #      recreate: yes
 #      ports:
