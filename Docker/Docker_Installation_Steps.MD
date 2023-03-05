@@ -5,24 +5,38 @@
 
 ## Installation Steps
 
+1. Create a user called ansadmin (on Control node and Managed host)  
+   ```sh
+   sudo -i
+   useradd -m -d /home/ansadmin -c "Docker user " ansadmin
+   echo "test123" | passwd --stdin ansadmin
+   ```
+1. Below command grant sudo access to ansadmin user. But we strongly recommended using "visudo" command if you are aware vi or nano editor.  (on Control node and Managed host)
+   ```sh
+   echo "ansadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+   exit
+   su - ansadmin
+   ```
+
 1. Install docker and start docker services
    ```sh 
-   yum install docker -y
-   docker --version 
+   sudo yum install docker -y 
    
    # start docker services
    systemctl start docker
    systemctl status docker
+
+   # add user to docker group 
+   sudo usermod -aG docker ansadmin
+   docker --version
    ```
-1. Create a user called dockeradmin & his password
+
+1. Enable password authentication to the docker server for the Ansible machine to connect to it.
    ```sh
-   useradd dockeradmin
-   passwd dockeradmin
+   sudo vim /etc/ssh/sshd_config --> type /PasswordAuthentication --> hit `Enter` --> change it from `no` to `yes`
+   sudo systemctl reload sshd
    ```
-1. add the user to docker group to manage docker 
-   ```
-   usermod -aG docker dockeradmin
-   ```
+
 ### Validation test
 1. Create a tomcat docker container by pulling a docker image from the public docker registry
    ```sh
