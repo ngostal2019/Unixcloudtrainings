@@ -1,19 +1,21 @@
 ---
 - hosts: ansible-server
   become: true
+  vars_files:
+    - /opt/docker_vars.yml # The ansadmin user must have the right permission to access this file and ansible will attend to read it during the ansible playbook execution
 
   tasks:
   - name: Stop if we have old docker container
     command: docker stop car-brand-choice-container
-    ignore_errors: yes
+    ignore_errors: yes # To ignore errors if the container does not run/exist
 
   - name: Remove stopped docker container
     command: docker rm car-brand-choice-container
-    ignore_errors: yes
+    ignore_errors: yes # To ignore errors if the container does not exist
 
   - name: Remove current docker image
     command: docker rmi car-brand-choice:v1.0.0
-    ignore_errors: yes
+    ignore_errors: yes # To ignore errors if the image does not exist
 #    register: result
 #    failed_when:
 #      - result.rc == 0
@@ -22,14 +24,20 @@
   - name: Building docker image
     command: docker build -t car-brand-choice:v1.0.0 .
     args:
-      chdir: /opt/docker
+      chdir: /opt/docker # This is were we chose our Dockerfile to reside in.
 
   - name: Create tag to image
     command: docker tag car-brand-choice ngostal/car-brand-choice:v1.0.0
 
-  - name: Push image on to dockerhub
+  - name: Login to your Docker Hub account
+    command: docker login -u "{{docker_username}}" -p "{{docker_passwd}}"
+#   /opt/docker_vars.yaml must be encrypted with ansible vault and can have the following entries
+#   docker_username: your_dockerhub_username
+#   docker_passwd: your_dockerhub_password
+
+  - name: Push image onto dockerhub
     command: docker push ngostal/car-brand-choice:v1.0.0
 
   - name: Remove docker images form ansible server
-    command: docker rmi car-brand-choice:latest ngostal/car-brand-choice::v1.0.0
+    command: docker rmi car-brand-choice:v1.0.0 ngostal/car-brand-choice:v1.0.0
     ignore_errors: yes

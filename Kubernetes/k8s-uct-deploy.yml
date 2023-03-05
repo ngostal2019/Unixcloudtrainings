@@ -1,28 +1,39 @@
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+apiVersion: apps/v1 # For versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: uct-car-deployment
+  name: uct-car-deployment # Name of the deployment when we run `kubectl get deployment` command
   labels:
-   training_center: unixcloudtrainings
+   training_center: unixcloudtrainings # Random label I chose
+
 spec:
   selector:
     matchLabels:
-      app: uct-devops-pod # Points to the container nname below in the pod template section
-  replicas: 2 # tells deployment to run 2 pods matching the template
+      app: uct-devops-pod # Points to the pod name below in the pod template section
+
+  replicas: 3 # tells deployment to run 2 pods matching the template
+
   strategy:
-    type: RollingUpdate
+    type: RollingUpdate # One of the K8S deployment strategy we have chosen
     rollingUpdate:
       maxSurge: 1 # Only one pod will be updated at the time
-      maxUnavailable: 1 # Only one pod will be updated at the time
-
+      maxUnavailable: 1 # Only one pod will be unavailable at the time
+  #Below is the definition of the pod as a template for the deployment to monitor
   template:
     metadata:
       labels:
-        app: uct-devops-pod # This pod is called in the matchLabels section under spec
+        app: uct-devops-pod # This pod name is called in the matchLabels section under spec
+        
     spec:
       containers:
-      - name: uct-devops-container
-        image: ngostal/car-brand-choice
-        imagePullPolicy: Always
+      - name: uct-devops-container # Random name given to the container that will run
+        image: ngostal/car-brand-choice # The existing image on dockerhub
+        imagePullPolicy: Always # To always pull the latest image from the container image registry
         ports:
-        - containerPort: 8080
+        - containerPort: 8080 # This is where our tomcat image is listen on
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "125m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
