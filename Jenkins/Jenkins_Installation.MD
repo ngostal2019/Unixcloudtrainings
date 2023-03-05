@@ -7,13 +7,13 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    - With Internet Access
    - Security Group with Port `8080` open for internet
 
-1. Java v11.0.13.x 
+1. Java v11.x.x.x 
 
 ## Install Java
 1. We will be using open java for our demo, Get the latest version from http://openjdk.java.net/install/
    ```sh
-   yum install java-11-openjdk*
-   #yum -y install java-11-openjdk.x86_64
+   amazon-linux-extras list | grep java
+   sudo amazon-linux-extras -y install java-openjdk11
    ```
 
 1. Confirm Java Version and set the java home
