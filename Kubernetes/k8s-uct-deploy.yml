@@ -7,8 +7,10 @@ metadata:
    app: uct-devops-svc
    country: USA
    environment: dev
+   deployedBy: KOPS
    managedByAnsible: true
    managedByJenkins: true
+   monitoredBy: New Relic
    courseGivenVia: Zoom
    type: Automation
    cloud: AWS
