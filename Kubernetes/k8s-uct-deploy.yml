@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: uct-car-deployment # Name of the deployment when we run `kubectl get deployment` command
   labels:
-   trainingCenter: unixcloudtrainings # Random label I chose
-   app: uct-devops-svc
+   app: uct-devops
    country: USA
    environment: dev
    deployedBy: KOPS
    managedByAnsible: true
    managedByJenkins: true
-   monitoredBy: New Relic
+   monitoredBy: newRelic
    courseGivenVia: Zoom
    type: Automation
    cloud: AWS
    typeOfProject: Java
+   trainingCenter: unixcloudtrainings # Random label I chose
 
 spec:
   selector:
@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: uct-devops-container # Random name given to the container that will run
-        image: ngostal/car-brand-choice # The existing image on dockerhub
+        image: ngostal/car-brand-choice:v1.0.0 # The existing image on dockerhub
         imagePullPolicy: Always # To always pull the latest image from the container image registry
         ports:
         - containerPort: 8080 # This is where our tomcat image is listen on

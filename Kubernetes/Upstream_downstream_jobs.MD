@@ -72,7 +72,7 @@ Enable connection between  Docker and Jenkins
 - Save
 ---------------------------------------------------------
 
-Enable connection between Ansible-control-node and Jenkins and Kubernetes bootstrap server
+# Enable connection between Ansible-control-node and Jenkins and Kubernetes bootstrap server
 
 ### Steps to create "Deploy_on_Kubernetes_CD" Jenkin job
 #### From Jenkins home page select "New Item"
