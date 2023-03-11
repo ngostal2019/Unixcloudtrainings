@@ -7,8 +7,8 @@ metadata:
    country: USA
    environment: dev
    deployedBy: KOPS
-   managedByAnsible: true
-   managedByJenkins: true
+   managedByAnsible: "true"
+   managedByJenkins: "true"
    monitoredBy: newRelic
    courseGivenVia: Zoom
    type: Automation
