@@ -3,7 +3,16 @@ kind: Deployment
 metadata:
   name: uct-car-deployment # Name of the deployment when we run `kubectl get deployment` command
   labels:
-   training_center: unixcloudtrainings # Random label I chose
+   trainingCenter: unixcloudtrainings # Random label I chose
+   app: uct-devops-svc
+   country: USA
+   environment: dev
+   managedByAnsible: true
+   managedByJenkins: true
+   courseGivenVia: Zoom
+   type: Automation
+   cloud: AWS
+   typeOfProject: Java
 
 spec:
   selector:

@@ -1,11 +1,16 @@
 ---
-- hosts: ansible-server
+- name: Build and push our docker image to the DockerHub Registry
+  hosts: docker
   become: true
   vars_files:
-    - /opt/docker_vars.yml # The ansadmin user must have the right permission to access this file and ansible will attend to read it during the ansible playbook execution
+    - /opt/ansible/docker_vars.yaml # The ansadmin user must have the right permission to access this file and ansible will attend to read it during the ansible playbook execution
+  vars:
+    major_v: 1
+    minor_v: 0
+    build_num: 0
 
   tasks:
-  - name: Stop if we have old docker container
+  - name: Stop if we have old docker containers running
     command: docker stop car-brand-choice-container
     ignore_errors: yes # To ignore errors if the container does not run/exist
 
@@ -14,7 +19,7 @@
     ignore_errors: yes # To ignore errors if the container does not exist
 
   - name: Remove current docker image
-    command: docker rmi car-brand-choice:v1.0.0
+    command: docker rmi "car-brand-choice:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
     ignore_errors: yes # To ignore errors if the image does not exist
 #    register: result
 #    failed_when:
@@ -22,22 +27,25 @@
 #      - '"docker" not in result.stdout'
 
   - name: Building docker image
-    command: docker build -t car-brand-choice:v1.0.0 .
+    command: docker build -t car-brand-choice .
     args:
-      chdir: /opt/docker # This is were we chose our Dockerfile to reside in.
+      chdir: /opt/docker # This is where we chose our Dockerfile to reside in.
 
   - name: Create tag to image
-    command: docker tag car-brand-choice ngostal/car-brand-choice:v1.0.0
+    command: docker tag car-brand-choice "ngostal/car-brand-choice:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
 
-  - name: Login to your Docker Hub account
-    command: docker login -u "{{docker_username}}" -p "{{docker_passwd}}"
-#   /opt/docker_vars.yaml must be encrypted with ansible vault and can have the following entries
+  - name: Login to your DockerHub account
+    command: docker login -u "{{ docker_username }}" -p "{{ docker_passwd }}"
+#   /opt/ansible/docker_vars.yaml must be encrypted with ansible vault and can have the following entries
 #   docker_username: your_dockerhub_username
 #   docker_passwd: your_dockerhub_password
 
-  - name: Push image onto dockerhub
-    command: docker push ngostal/car-brand-choice:v1.0.0
+  - name: Push image onto DockerHub
+    command: docker push "ngostal/car-brand-choice:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
 
-  - name: Remove docker images form ansible server
-    command: docker rmi car-brand-choice:v1.0.0 ngostal/car-brand-choice:v1.0.0
+  - name: Remove docker images from docker server
+    command: docker rmi car-brand-choice "ngostal/car-brand-choice:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
     ignore_errors: yes
+
+  - name: Log out from your DockerHub Account
+    command: docker logout

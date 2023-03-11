@@ -4,7 +4,15 @@ metadata:
   name: uct-svc
   labels:
     app: uct-devops-svc
-    training_center: unixcloudtrainings
+    trainingCenter: unixcloudtrainings
+    country: USA
+    environment: dev
+    managedByAnsible: true
+    managedByJenkins: true
+    courseGivenVia: Zoom
+    type: Automation
+    cloud: AWS
+    typeOfProject: Java
 spec:
   selector:
     app: uct-devops-pod # This will select the pod that was created under the deployment pod template section
