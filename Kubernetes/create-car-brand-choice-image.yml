@@ -1,7 +1,7 @@
 ---
 - name: Build and push our docker image to the DockerHub Registry
   hosts: docker
-  become: true
+  #become: true
   vars_files:
     - /opt/ansible/docker_vars.yaml # The ansadmin user must have the right permission to access this file and ansible will attend to read it during the ansible playbook execution
   vars:

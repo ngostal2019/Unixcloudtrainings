@@ -1,7 +1,7 @@
 ---
 - name: Create pods using deployment
   hosts: k8s-bootstrap-server
-  become: true
+  #become: true
   #user: root
 
   tasks:
