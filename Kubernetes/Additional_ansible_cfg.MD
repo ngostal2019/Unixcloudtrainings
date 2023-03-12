@@ -45,7 +45,7 @@
       ```
     - Ansible comes pre-installed with the `ansible.cfg` file, but when installing it using `pip3`, you have to create and populate the file yourself just like the hosts file. So, let's do it:
       ```yaml
-      vim /opt/ansibleansible.cfg
+      vim /opt/ansible.cfg
       # Write the below inside to tell ansible where to find the vault password that will be used to read the docker_vars.yaml file:
 
       [defaults]
