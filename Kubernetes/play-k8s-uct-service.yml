@@ -6,5 +6,6 @@
 
   tasks:
   - name: Applying the service manifest file
-    command: kubectl apply -f k8s-uct-service.yml
+    command: kubectl apply -f k8s-uct-svc.yml
+    ignore-errors: yes
 

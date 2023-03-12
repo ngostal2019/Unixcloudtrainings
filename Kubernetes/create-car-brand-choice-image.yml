@@ -36,7 +36,7 @@
 
   - name: Login to your DockerHub account
     command: docker login -u "{{ docker_username }}" -p "{{ docker_passwd }}"
-#   /opt/ansible/docker_vars.yaml must be encrypted with ansible vault and can have the following entries
+#   /opt/ansible/docker_vars.yaml
 #   docker_username: your_dockerhub_username
 #   docker_passwd: your_dockerhub_password
 
