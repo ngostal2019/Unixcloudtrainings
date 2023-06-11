@@ -1,4 +1,4 @@
-# Setup Kubernetes (K8s) Cluster on AWS
+# Setup Kubernetes (K8s) Cluster on AWS with KOPS
 
 * Before you attach the Ec2-k8s-bootstrap-role to your bootstrap server try to see if you can operate on aws from the command line with the following command on your ec2 instance
    ```sh
