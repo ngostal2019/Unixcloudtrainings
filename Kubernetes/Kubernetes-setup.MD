@@ -122,22 +122,22 @@
       }`
    ```
 1. Configure the AWS region and the output format.
-  - Note: If you attached the role to the user, then you may not need to attach the role to the EC2 machine and run aws configure to set up the AWS ACCESS ID and the AWS SECRET ACCESS KEY (They kind of represent the username and password of the user for programatic access)
-   ```sh
-      aws configure
-      AWS Access Key ID [None]: your-access-key-id
-      AWS Secret Access Key [None]: your-secret-key
-      Default region name [None]: any-region
-      Default output format [None]: json
-   ```
- - In my case, I attached the role to the EC2 machine already. So, I just need to set up the region and the output format and leave the AWS ACCESS ID and the AWS SECRET ACCESS KEY empty
-   ```sh
-      aws configure
-      AWS Access Key ID [None]: your-access-key-id
-      AWS Secret Access Key [None]: your-secret-key
-      Default region name [None]: us-east-1
-      Default output format [None]: json
-   ```
+   - Note: If you attached the role to the user, then you may not need to attach the role to the EC2 machine and run aws configure to set up the AWS ACCESS ID and the AWS SECRET ACCESS KEY (They kind of represent the username and password of the user for programatic access)
+      ```sh
+         aws configure
+         AWS Access Key ID [None]: your-access-key-id
+         AWS Secret Access Key [None]: your-secret-key
+         Default region name [None]: any-region
+         Default output format [None]: json
+      ```
+   - In my case, I attached the role to the EC2 machine already. So, I just need to set up the region and the output format and leave the AWS ACCESS ID and the AWS SECRET ACCESS KEY empty
+      ```sh
+         aws configure
+         AWS Access Key ID [None]: your-access-key-id
+         AWS Secret Access Key [None]: your-secret-key
+         Default region name [None]: us-east-1
+         Default output format [None]: json
+      ```
 
 1. Create an S3 bucket (A bucket should have a unique name all across the AWS account)
    * NOTE: 
@@ -269,7 +269,7 @@
          * ssh to the master: ssh -i ~/.ssh/id_rsa ubuntu@api.useast1.k8s.uct.in
          * the ubuntu user is specific to Ubuntu. If not using Ubuntu please use the appropriate user based on your OS.
          * read about installing addons at: https://kops.sigs.k8s.io/addons.
-    ```
+   ```
 
 1. Validate your cluster (Your cluster will be ready between 5 - 10 minutes)
      ```sh
@@ -349,7 +349,7 @@
       kops delete cluster --name=$CLUSTER_NAME --yes
    ```
 
-1. Delete the Route53 and S3 Bucket, EC2 Bootstrap VM, IAM roles created earlier
+1. Delete the *Route53* and *S3 Bucket*, *EC2 Bootstrap VM*, *IAM roles* created earlier
 
 ## Installation reference
 1. The above installation procedure have been simplified and taken from the KOPS website available [here](https://kops.sigs.k8s.io/getting_started/aws/) 
