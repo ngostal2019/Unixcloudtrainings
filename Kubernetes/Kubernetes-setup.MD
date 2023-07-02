@@ -167,8 +167,8 @@
 1. Now let's make our bucket publicly accessible by changing the *ACL*
    ```sh
       aws s3api put-bucket-acl \
-    --bucket useast1.k8s.uct.in \
-    --acl public-read
+      --bucket useast1.k8s.uct.in \
+      --acl public-read
    ```
 
 1. It is extremely recommended to version your bucket so the configuration can be recovered in the event of disaster. So, let's do it with the following command:
