@@ -71,14 +71,17 @@
       sudo chmod +x kops-linux-amd64
       sudo mv kops-linux-amd64 /usr/local/bin/kops
     ```
+
 1. Verify the ansadmin user is able to type the kops and kubectl commands
    ```sh
       kops version
       kubectl version --short --client
    ```
+
 1. Try once again to list aws s3 bucket, if no error message appear, then the role was successsfully attached to the EC2 bootsrap server and we are good to move on to the next step
     ```sh
-      aws ec2 describe-availability-zones --region us-east-1 # Attach the created role Ec2-k8s-bootstrap-role if you didn't do it before 
+      aws ec2 describe-availability-zones --region us-east-1 # Attach the created role Ec2-k8s-bootstrap-role if you didn't do it before
+
       *Output: 
       `{
       "AvailabilityZones": [
@@ -119,7 +122,7 @@
       }`
    ```
 1. Configure the AWS region and the output format.
-  - Note: If you attached the role to the user, then you may you may not need tto attache the role to the EC2 machine and run aws configure to set up the AWS ACCESS ID and the AWS SECRET ACCESS KEY (Tey kind of represent the username and password of the user for programatic access)
+  - Note: If you attached the role to the user, then you may not need to attach the role to the EC2 machine and run aws configure to set up the AWS ACCESS ID and the AWS SECRET ACCESS KEY (They kind of represent the username and password of the user for programatic access)
    ```sh
       aws configure
       AWS Access Key ID [None]: your-access-key-id
@@ -138,7 +141,7 @@
 
 1. Create an S3 bucket (A bucket should have a unique name all across the AWS account)
    * NOTE: 
-   In order for ServiceAccounts(In K8S) to use external permissions (aka IAM Roles for ServiceAccounts), you also need a bucket for hosting the OIDC documents. While you can create a separate bucket for, for the sake of the training we will use a non recommended approach by granting a public ACL to the same bucket name. 
+   In order for ServiceAccounts(In K8S) to use external permissions (aka IAM Roles for ServiceAccounts), you also need a bucket for hosting the OIDC documents. While you can create a separate bucket for it, for the sake of the training we will use a non recommended approach by granting a public ACL to the same bucket name. 
    Again, it's recommended to have a separate bucket for these files.
    The ACL must be public so that the AWS STS service can access them.
 
@@ -146,17 +149,33 @@
       aws s3api create-bucket \
       --bucket useast1.k8s.uct.in \
       --region us-east-1 \
-      --acl public-read 
-      
+      --object-ownership BucketOwnerPreferred
+
       *Output:
       `{
       "Location": "/useast1.k8s.uct.in"
       }`
    ```
 
+1. Change the bucket public accessibility from private to public
+   ```sh
+      aws s3api put-public-access-block \
+      --bucket useast1.k8s.uct.in \
+      --public-access-block-configuration BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false
+   ```
+
+1. Now let's make our bucket publicly accessible by changing the *ACL*
+   ```sh
+      aws s3api put-bucket-acl \
+    --bucket useast1.k8s.uct.in \
+    --acl public-read
+   ```
+
 1. It is extremely recommended to version your bucket so the configuration can be recovered in the event of disaster. So, let's do it with the following command:
    ```sh
-      aws s3api put-bucket-versioning --bucket useast1.k8s.uct.in  --versioning-configuration Status=Enabled
+      aws s3api put-bucket-versioning \
+      --bucket useast1.k8s.uct.in \
+      --versioning-configuration Status=Enabled
    ```
 
 1. Verify the private DNS DNS domain name we created
@@ -206,7 +225,7 @@
       --ssh-public-key=~/.ssh/id_rsa.pub \
       --dns-zone=uct.in \
       --dns private
-    ```
+   ```
 
 1. Suggestions from kops(optional):
  * list clusters with: kops get cluster
@@ -298,7 +317,7 @@
 
 ## Deploying pods on Kubernetes on AWS
 1. Testing a manual deployment of our application from the cluster, we can use the procedure below:
-    ```sh
+   ```sh
       kubectl create deployment sample-nginx --image=nginx --replicas=2 --port=80
       kubectl create deployment devops-tomcat --image=ngostal/devops-tomcat-image:v1 --replicas=2 --port=8080
       kubectl get deployments
@@ -326,7 +345,7 @@
 
 ## Cleanups
 1. To delete cluster
-    ```sh
+   ```sh
       kops delete cluster --name=$CLUSTER_NAME --yes
    ```
 
